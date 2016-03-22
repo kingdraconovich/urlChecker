@@ -41,18 +41,18 @@ def on_click(stop_processing):
     # Sending the login request and storing the cookie for session
     c = pycurl.Curl()
     if urlTextbox.text() != '':
-        c.setopt(c.URL, 'http://'+str(urlTextbox.text())+'/user/login/js/1')
+        c.setopt(c.URL, 'http://'+str(urlTextbox.text())+'/login')
     else:
-        c.setopt(c.URL, 'http://smartyads.com/user/login/js/1')
+        c.setopt(c.URL, 'http://smartyads.com/login')
     c.setopt(c.COOKIEFILE, '')
 
-    post_data = {'emailAddressH': emailTextbox.text(), 'password': passTextbox.text(), 'header': '1',
-                 'rememberMe': '1'}
+    post_data = {'email': emailTextbox.text(), 'password': passTextbox.text()}
+
     #print('http://'+str(urlTextbox.text())+'/user/login/js/1')
     #print(post_data)
     # Form data must be provided already urlencoded.
     postfields = urlencode(post_data)
-    #print(postfields)
+    print(postfields)
     # Sets request method to POST,
     # Content-Type header to application/x-www-form-urlencoded
     # and data to send in request body.
@@ -65,9 +65,9 @@ def on_click(stop_processing):
     logTextbox.append("===========LOGIN STATUS===========")
 
     if urlTextbox.text() != '':
-       logTextbox.append("Logging to: http://"+str(urlTextbox.text())+"/user/login/js/1")
+       logTextbox.append("Logging to: http://"+str(urlTextbox.text())+"/login")
     else:
-        logTextbox.append("Logging to: http://smartyads.com/user/login/js/1")
+        logTextbox.append("Logging to: http://smartyads.com/login")
 
     logTextbox.append('Status: %d' % c.getinfo(c.RESPONSE_CODE))
     # Elapsed time for the transfer.
